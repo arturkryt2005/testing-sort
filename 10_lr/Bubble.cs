@@ -11,6 +11,52 @@ namespace _10_lr
         public int iterationCount = 0;
         public static Form1 form1;
 
+
+        public int[] AAlgorithm(int[] mass)
+        {
+            for (int i = 0; i < mass.Length - 1; i++)
+            {
+                for (int j = i + 1; j < mass.Length; j++)
+                {
+                    this.iterationCount++;
+                    if (mass[i] > mass[j])
+                    {
+                        int temp = mass[i];
+                        mass[i] = mass[j];
+                        mass[j] = temp;
+                    }
+                }
+            }
+            return mass;
+        }
+
+        public static int[] ViborSort(int[] mas)
+        {
+            for (int i = 0; i < mas.Length - 1; i++)
+            {
+                int min = i;
+                for (int j = i + 1; j < mas.Length; j++)
+                {
+                    if (mas[j] < mas[min])
+                    {
+                        min = j;
+                    }
+                }
+                int temp = mas[min];
+                mas[min] = mas[i];
+                mas[i] = temp;
+            }
+            return mas;
+        }
+
+
+
+
+
+
+
+
+
         public int[] Algorithm(int[] mass, bool flag = true)
         {
             if (flag)

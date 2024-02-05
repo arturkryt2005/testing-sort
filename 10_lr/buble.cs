@@ -11,11 +11,49 @@ namespace _10_lr
     {
         public int iterationCount = 0;
         public static Form1 form1;
+
+
+        public static void MergeSort(int[] array)
+        {
+            if (array.Length <= 1)
+                return;
+
+            int[] left = new int[array.Length / 2];
+            int[] right = new int[array.Length - left.Length];
+
+            Array.Copy(array, 0, left, 0, left.Length);
+            Array.Copy(array, left.Length, right, 0, right.Length);
+
+            MergeSort(left);
+            MergeSort(right);
+            Merge(array, left, right);
+        }
+
+        private static void Merge(int[] array, int[] left, int[] right)
+        {
+            int leftIndex = 0, rightIndex = 0, arrayIndex = 0;
+
+            while (leftIndex < left.Length && rightIndex < right.Length)
+            {
+                if (left[leftIndex] <= right[rightIndex])
+                    array[arrayIndex++] = left[leftIndex++];
+                else
+                    array[arrayIndex++] = right[rightIndex++];
+            }
+
+            while (leftIndex < left.Length)
+                array[arrayIndex++] = left[leftIndex++];
+
+            while (rightIndex < right.Length)
+                array[arrayIndex++] = right[rightIndex++];
+        }
+
+
+
         public void SortAnalysis(int[] array, int a, int b)
         {
             int i = a;
             int j = b;
-
             int middle = array[(a + b) / 2];
             while (i <= j)
             {
@@ -37,6 +75,7 @@ namespace _10_lr
                 }
                 ComparativeAnalysis.NumberOfPermutations++;
             }
+
             ComparativeAnalysis.Comparison++;
             if (a < j)
             {
